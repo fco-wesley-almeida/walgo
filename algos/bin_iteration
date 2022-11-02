@@ -1,0 +1,27 @@
+    // struct sub_arr * w = (struct sub_arr *) malloc(sizeof(struct subarray_sum) * n_comb); 
+    // int max_sum = INT_MIN;
+    // int max_sum_index = 0;
+    // for (int i = 1; i < n_comb - 1; i++)
+    // {
+    //     int j = i, k = 0;
+    //     w[i].vector = (int *) malloc(sizeof(int) * vector_length);
+    //     w[i].size = 0;
+    //     w[i].sum = 0;
+    //     while (j >= 1)
+    //     {
+    //         if (j % 2) w[i].vector[w[i].size++] = v[k];
+    //         w[i].sum += v[k++] * (j % 2);
+    //         j = j / 2;
+    //     }
+    //     if (w[i].sum > max_sum) {
+    //         max_sum = w[i].sum;
+    //         max_sum_index = i;
+    //     }
+    // } 
+    // struct sub_arr a = w[max_sum_index];
+    // for (int i = 1; i < n_comb - 1; i++)
+    // {
+    //     w[i].vector = NULL;
+    // }
+    // w = NULL;
+    // return a;
