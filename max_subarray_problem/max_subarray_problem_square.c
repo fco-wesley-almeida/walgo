@@ -23,32 +23,34 @@ void print_vector(int vector_size, int* vector)
     printf("\n");
 }
 
-struct sub_arr max_subarray(int vector_length, int *v)
+struct sub_arr max_subarray(int n, int *v)
 {
-    struct sub_arr w;
-    w.sum = INT_MIN;
-    for (int i = 0; i < vector_length; i++)
-    {
-        for(int j = vector_length; j > i; j--)
+    int max_sum = INT_MIN;
+    int max_index_start;
+    int max_index_end;
+    for (int i = 0; i < n; i++) 
+    {   
+        int sum = 0;
+        for (int j = i; j < n; j++)
         {
-            int size = 0;
-            int sum = 0;
-            int *vector = (int *) malloc(sizeof(int) * (j - i));
-            for (int k = i; k < j; k++)
-            {
-                vector[size++] = v[k];
-                sum += v[k];
-            }
-            if (sum > w.sum) {
-                w.sum = sum;
-                w.vector = vector;
-                w.size = size;
-            } else {
-                free(vector);
+            sum += v[j];
+            if (sum > max_sum) {
+                max_sum = sum;
+                max_index_start = i;
+                max_index_end = j;
             }
         }
     }
-    return w;
+    int *w = (int *) malloc(sizeof(int) * (max_index_end - max_index_start + 1));
+    int j = 0;
+    for (int i = max_index_start; i < max_index_end + 1; i++) {
+        w[j++] = v[i];
+    }
+    struct sub_arr q;
+    q.size = max_index_end - max_index_start + 1;
+    q.vector = w;
+    q.sum = max_sum;
+    return q;
 }
 
 int *vector_from_stdin(int argc, char** argv)
