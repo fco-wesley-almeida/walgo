@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <string.h>
 
-int sum_vector(int *v, int n)
+int max_element(int *v, int n)
 {
     int sum = 0;
     for (int i = 0; i < n; i++)
@@ -23,7 +23,8 @@ int *vector_from_stdin(int argc, char** argv)
             for(int j = 1; argv[i + 1][j] != '\0'; j++) {
                 number_str[j - 1] = argv[i + 1][j];
             }
-            v[n] = atoi(argv[i + 1]);
+            v[n] = -atoi(number_str);
+            free(number_str);
         } else {
             v[n] = atoi(argv[i + 1]);
         }
@@ -36,7 +37,7 @@ int main(int argc, char** argv)
 {
     int vector_size = argc - 1;
     int* vector = vector_from_stdin(argc, argv);
-    int sum = sum_vector(vector, vector_size);
+    int sum = max_element(vector, vector_size);
     printf("%d\n", sum);
     free(vector);
     return EXIT_SUCCESS;

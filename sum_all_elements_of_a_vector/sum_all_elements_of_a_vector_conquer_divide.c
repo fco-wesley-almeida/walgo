@@ -28,7 +28,8 @@ int *vector_from_stdin(int argc, char** argv)
             for(int j = 1; argv[i + 1][j] != '\0'; j++) {
                 number_str[j - 1] = argv[i + 1][j];
             }
-            v[n] = atoi(argv[i + 1]);
+            v[n] = -atoi(number_str);
+            free(number_str);
         } else {
             v[n] = atoi(argv[i + 1]);
         }
