@@ -72,8 +72,8 @@ struct subarray max_subarray_sum(int *v, int left, int right)
         return subarr;
     }
     int middle = (left + right) / 2;
-    subarr_left = max_subarray_sum(v,left,middle);
-    subarr_right = max_subarray_sum(v,middle + 1, right);
+    subarr_left = max_subarray_sum(v, left, middle);
+    subarr_right = max_subarray_sum(v, middle + 1, right);
     subarr_cross = find_max_crossing_subarray(v, left, middle, right);
     if (subarr_left.sum >= subarr_right.sum && subarr_left.sum >= subarr_cross.sum) {
         subarr = subarr_left;
