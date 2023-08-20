@@ -127,10 +127,9 @@ int bfs(int dimension, int** m, Coordinate p, Coordinate q)
     for(int i = 0; i < dimension; i++) {
        visited[i] =  (int **) malloc(dimension * sizeof(int *));
        for(int j = 0; j < dimension; j++) {
-            visited[i][j] = (int *) malloc(3 * sizeof(int));
-            visited[i][j][0] = 0; 
+            visited[i][j] = (int *) malloc(2 * sizeof(int));
+            visited[i][j][0] = -1; 
             visited[i][j][1] = -1; 
-            visited[i][j][2] = -1; 
        }
     }
     queue = queue_create();
@@ -141,12 +140,11 @@ int bfs(int dimension, int** m, Coordinate p, Coordinate q)
         for(int i = 0; i < 4; i++) {
             x = i & 1 ? cor->x : cor->x + (!i ? 1 : -1);
             y = !(i & 1) ? cor->y : cor->y + (i ? 1 : -1);
-            if (x >= dimension || y >= dimension || x < 0 || y < 0 || m[x][y] || visited[x][y][0]) {
+            if (x >= dimension || y >= dimension || x < 0 || y < 0 || m[x][y] || visited[x][y][1] >= 0) {
                 continue;
             }
-            visited[x][y][0] = 1;
-            visited[x][y][1] = cor->x;
-            visited[x][y][2] = cor->y;
+            visited[x][y][0] = cor->x;
+            visited[x][y][1] = cor->y;
             queue_push(queue, create_coordinate(x, y));
         }
     }
@@ -154,15 +152,15 @@ int bfs(int dimension, int** m, Coordinate p, Coordinate q)
     y = q.y;
     k = 0;
     while(x != p.x || y != p.y) {
-        i = visited[x][y][1]; 
-        j = visited[x][y][2]; 
+        i = visited[x][y][0]; 
+        j = visited[x][y][1]; 
         x = i;
         y = j;
-        k++;
         if (x == -1) {
             k = -1;
             break;
         }
+        k++;
     }
     free_matrix_3_dimensions(dimension, dimension, visited);
     free(queue);
@@ -197,7 +195,7 @@ int main()
     m[2][3] = 1;
 
     int result = bfs(dimension, m, *create_coordinate(0,0), *create_coordinate(3,2));
-    printf("\n%d\n", result);
+    printf("%d\n", result);
     free_matrix_2_dimensions(dimension, dimension, m);
     return 0;
 }
