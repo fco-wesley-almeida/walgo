@@ -1,21 +1,21 @@
 #include "stdlib.h"
 #include "stdio.h"
 
-typedef struct Graph {
-    int size;
-    Vertex* vertices;
-} Graph;
 
+typedef struct LinkedListNode {
+    int vertex;
+    struct LinkedListNode* next;
+} LinkedListNode;
 
 typedef struct Vertex {
     int value;
     LinkedListNode* linkedList;
 } Vertex;
 
-typedef struct LinkedListNode {
-    int vertex;
-    struct LinkedListNode* next;
-} LinkedListNode;
+typedef struct Graph {
+    int size;
+    Vertex* vertices;
+} Graph;
 
 
 Graph* create_graph()
@@ -81,7 +81,7 @@ int main()
     v5 = create_vertex(graph, 5);
     create_node(graph, v1, v4);
     create_node(graph, v1, v3);
-    create_node(graph, v4, v1);
+    create_node(graph, v4, v2);
     create_node(graph, v3, v2);
     create_node(graph, v5, v4);
     create_node(graph, v1, v5);
