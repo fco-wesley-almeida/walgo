@@ -4,12 +4,7 @@ function pi (x) {
     let pi = 0;
     for(let i = 0; i < x; i++) 
     {
-        let divisor = 2 * i + 1;
-        if (i % 2 === 0) {
-            pi += 4 / divisor;
-        } else {
-            pi -= 4 / divisor;
-        }
+        pi += 4 / (2 * i + 1) * ((i & 0b1) === 0b0 ? 1 : -1);
     }
     return pi;
 }
